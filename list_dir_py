@@ -11,8 +11,6 @@ dir = sys.argv[1]
 
 print('contents of {}\n'.format(dir))
 for item in os.listdir(dir):
-	if item[0] == '.':	# don't show hidden files
-		continue
 	if os.path.isdir(os.path.join(dir, item)):
 		print('dir:  ', end='')
 	else:
