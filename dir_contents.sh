@@ -1,12 +1,16 @@
 #! /bin/bash
 
-# check for presence of ONE command line arg
-if [[ $# != 1 ]]; then
-	echo 'call with directory path'
-	exit -1			# return "false"
-fi
+errMsg='call as: dir_contents.sh [-i] directory_path'
 
-dir=$1
+case $# in
+	1 ) showHidden='false'; dir=$1 ;;
+	2 ) showHidden='true';  dir=$2 ;;
+	* ) echo $errMsg ; exit -1 ;;
+esac
+
+if [[ $showHidden == 'true' ]]; then
+	dir=$dir+$dir/.*
+fi
 
 printf "contents of $dir\n\n"
 for item in $dir/*; do
